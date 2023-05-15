@@ -18,24 +18,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using ConnectElectronics.Models;
-using System.ComponentModel;
 
 namespace ConnectElectronics.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUserStore<ApplicationUser> _userStore;
-        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IUserStore<IdentityUser> userStore,
+            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -76,17 +74,6 @@ namespace ConnectElectronics.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            /// 
-            [Required]
-            [DisplayName("Emri")]
-            [StringLength(30, MinimumLength = 3)]
-            public string FirstName { get; set; }
-
-            [Required]
-            [DisplayName("Mbiemri")]
-            [StringLength(30, MinimumLength = 3)]
-            public string LastName { get; set; }
-
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -110,29 +97,6 @@ namespace ConnectElectronics.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            [Required]
-            [DisplayName("Numri i Kontaktit")]
-            public string PhoneNumber { get; set; }
-
-            [Required]
-            [DisplayName("Ditelindja")]
-            [DataType(DataType.Date)]
-            public DateTime Birthday { get; set; }
-            [Required]
-            [DisplayName("Qyteti")]
-            public string City { get; set; }
-
-            [Required]
-            [DisplayName("Rruga")]
-            public string Street { get; set; }
-
-            [Required]
-            [DisplayName("Kodi Postar")]
-            public int PostalNumber { get; set; }
-
-
-            [DisplayName("Nr_Shtepise")]
-            public int HouseNr { get; set; }
         }
 
 
@@ -149,14 +113,7 @@ namespace ConnectElectronics.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FirstName;
-                user.LastName = user.LastName;
-                user.PhoneNumber = Input.PhoneNumber;
-                user.Birthday = Input.Birthday;
-                user.City = Input.City;
-                user.Street = Input.Street;
-                user.PostalNumber = Input.PostalNumber;
-                user.HouseNr = Input.HouseNr;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -197,27 +154,27 @@ namespace ConnectElectronics.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private ApplicationUser CreateUser()
+        private IdentityUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                return Activator.CreateInstance<IdentityUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<ApplicationUser> GetEmailStore()
+        private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<ApplicationUser>)_userStore;
+            return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
 }
