@@ -4,6 +4,7 @@ using ConnectElectronics.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConnectElectronics.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514170613_MigrimiMigratoion")]
+    partial class MigrimiMigratoion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,160 +108,6 @@ namespace ConnectElectronics.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Kategori", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Emri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pershkrimi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Kategorit");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Marka", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Emri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Shteti")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Markat");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Porosi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DataPorosis")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Emri")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("KlientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KlientUserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mbiemri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumerKontakti")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Qyteti")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Shenime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("ShumaT")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Porosit");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Porosi_Detaje", b =>
-                {
-                    b.Property<int>("PorosiId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProduktId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Pr_Sasia")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ShumaProdukt")
-                        .HasColumnType("float");
-
-                    b.HasKey("PorosiId", "ProduktId");
-
-                    b.HasIndex("ProduktId");
-
-                    b.ToTable("Porosi_Detajet");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Produkt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<decimal>("Cmimi")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.Property<string>("Emri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Foto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("KategoriID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MarkaID")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("Oferte")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Pershkrimi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Sasia")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KategoriID");
-
-                    b.HasIndex("MarkaID");
-
-                    b.ToTable("Produkte");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -395,44 +243,6 @@ namespace ConnectElectronics.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ConnectElectronics.Models.Porosi_Detaje", b =>
-                {
-                    b.HasOne("ConnectElectronics.Models.Porosi", "Porosi")
-                        .WithMany("Porosi_Detajet")
-                        .HasForeignKey("PorosiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ConnectElectronics.Models.Produkt", "Produkt")
-                        .WithMany("Porosi_Detajet")
-                        .HasForeignKey("ProduktId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Porosi");
-
-                    b.Navigation("Produkt");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Produkt", b =>
-                {
-                    b.HasOne("ConnectElectronics.Models.Kategori", "Kategori")
-                        .WithMany("Produkte")
-                        .HasForeignKey("KategoriID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ConnectElectronics.Models.Marka", "marka")
-                        .WithMany("Produkte")
-                        .HasForeignKey("MarkaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kategori");
-
-                    b.Navigation("marka");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -482,26 +292,6 @@ namespace ConnectElectronics.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Kategori", b =>
-                {
-                    b.Navigation("Produkte");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Marka", b =>
-                {
-                    b.Navigation("Produkte");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Porosi", b =>
-                {
-                    b.Navigation("Porosi_Detajet");
-                });
-
-            modelBuilder.Entity("ConnectElectronics.Models.Produkt", b =>
-                {
-                    b.Navigation("Porosi_Detajet");
                 });
 #pragma warning restore 612, 618
         }
