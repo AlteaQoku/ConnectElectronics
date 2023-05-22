@@ -1,7 +1,7 @@
 using ConnectElectronics.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using ConnectElectronics.Models;
 namespace ConnectElectronics
 {
     public class Program
@@ -22,10 +22,10 @@ namespace ConnectElectronics
                 options.Cookie.IsEssential = true;
             });
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
-
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
             var app = builder.Build();
             app.UseSession();
 
