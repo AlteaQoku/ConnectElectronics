@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ConnectElectronics.Models.Porosi_Detaje>
+
+@{
+    ViewData["Title"] = "Detaje Porosi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detajet e Porsise</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProduktId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.ShumaProdukt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Pr_Sasia)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Produkt" asp-route-id="@item.ProduktId">@item.ProduktId</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShumaProdukt) ALL
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pr_Sasia)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

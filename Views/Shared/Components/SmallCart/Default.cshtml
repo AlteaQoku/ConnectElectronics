@@ -1,0 +1,13 @@
+﻿@model SmallCartViewModel
+@if (Model != null)
+{
+    <p>Produktet ne shporte: <span class="badge badge-primary">@Model.NumriProdukteve</span></p>
+    <p>Totali: <b>@Model.TotalCmimi ALL</b></p>
+    <a class="btn btn-info" asp-controller="Cart" asp-action="Index">Shiko Shporte</a>
+    <a class="btn btn-danger" asp-controller="Cart" asp-action="Clear">Pastro Shporte</a>
+}
+else
+{
+    <p class="lead m-0">Karta eshte bosh</p>
+}
+

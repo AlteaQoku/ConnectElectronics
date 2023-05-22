@@ -1,0 +1,35 @@
+﻿@model ConnectElectronics.Models.Marka
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detaje</h1>
+
+<div>
+    <h4>Marka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Emri)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Emri)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Shteti)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Shteti)
+        </dd>
+    </dl>
+</div>
+<div>
+    <p>
+    @(User.IsInRole("Admin")){
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edito</a> 
+    }
+    <a asp-action="Index">Lista e Markave</a>
+    </p>
+</div>

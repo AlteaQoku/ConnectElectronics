@@ -1,0 +1,72 @@
+﻿@model ConnectElectronics.Models.Produkt
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 style="padding-left:150px;">Edito Produktin</h1>
+
+<h4 style="padding-left:150px;">Produkt</h4>
+<hr />
+<div class="row" style="padding-left:150px">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Emri" class="control-label"></label>
+                <input asp-for="Emri" class="form-control" />
+                <span asp-validation-for="Emri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cmimi" class="control-label"></label>
+                <input asp-for="Cmimi" class="form-control" />
+                <span asp-validation-for="Cmimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sasia" class="control-label"></label>
+                <input asp-for="Sasia" class="form-control" />
+                <span asp-validation-for="Sasia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pershkrimi" class="control-label"></label>
+                <input asp-for="Pershkrimi" class="form-control" />
+                <span asp-validation-for="Pershkrimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Foto</label>
+                <input id="ImageFile" type="file"
+                       name="ImageFile" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="Oferte"></label>
+                    <input asp-for="Oferte" />
+                    <span asp-validation-for="Oferte" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="KategoriID" class="control-label"></label>
+                <select asp-for="KategoriID" class="form-control" asp-items="ViewBag.KategoriID"></select>
+                <span asp-validation-for="KategoriID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarkaID" class="control-label"></label>
+                <select asp-for="MarkaID" class="form-control" asp-items="ViewBag.MarkaID"></select>
+                <span asp-validation-for="MarkaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Lista e Produkteve</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

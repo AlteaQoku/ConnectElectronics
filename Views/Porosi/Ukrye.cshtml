@@ -1,0 +1,14 @@
+﻿@model ConnectElectronics.Models.Porosi
+
+@{
+    ViewData["Title"] = "Porosia u krye";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:150px">
+<h3>Porosia u krye me Sukses</h3>
+<h4>Faleminderit!</h4>
+<h4>Per te shikuar detajet e Porosis klikoni poshte</h4>
+
+<a class="btn btn-primary float-center" asp-action="Detaje" asp-route-id="@Model.Id">Detajet
+</a>
+ </div>

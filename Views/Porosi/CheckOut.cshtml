@@ -1,0 +1,60 @@
+﻿@model ConnectElectronics.Models.Porosi
+
+@{
+    ViewData["Title"] = "StoreOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:150px">
+<h1>CheckOut</h1>
+
+    <h4>Porosi</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CheckOut">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Emri" class="control-label"></label>
+                    <input asp-for="Emri" class="form-control" />
+                    <span asp-validation-for="Emri" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mbiemri" class="control-label"></label>
+                    <input asp-for="Mbiemri" class="form-control" />
+                    <span asp-validation-for="Mbiemri" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa" class="control-label"></label>
+                    <input asp-for="Adresa" class="form-control" />
+                    <span asp-validation-for="Adresa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Qyteti" class="control-label"></label>
+                    <input asp-for="Qyteti" class="form-control" />
+                    <span asp-validation-for="Qyteti" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumerKontakti" class="control-label"></label>
+                    <input asp-for="NumerKontakti" class="form-control" />
+                    <span asp-validation-for="NumerKontakti" class="text-danger"></span>
+                </div>
+             <div class="form-group">
+                    <label asp-for="Shenime" class="control-label"></label>
+                    <textarea asp-for="Shenime" class="form-control"></textarea>
+                    <span asp-validation-for="Shenime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Krijo" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div>
+        <a asp-controller="Produkt" asp-action="Index">Kthehu te Produktet</a>
+    </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

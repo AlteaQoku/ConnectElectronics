@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Produkt>
+@{
+    ViewData["Title"] = "Lista e Produkteve";
+}
+
+@if (Model.Count() < 1)
+{
+    <h3>Nuk gjendet asnje rezultat</h3>
+}
+<br />
+<div class="row" style="padding-left:75px">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6 col-12 mb-6">
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FF0000;height:3.5rem">
+                    <h5 class="card-title">@item.Emri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <img class="img-fluid" src="~/images/@item.Foto" width="150px" height="150px" alt="Product Image">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <br/>
+                            <p class="card-text">@item.Pershkrimi</p>
+                            <p class="card-text text-success">@item.Cmimi ALL</p>
+                        
+                        <p class="card-text">
+                            <b>Marka: </b>
+                            <a class="text-decoration-none" asp-controller="Marka" asp-action="Details" asp-route-id="@item.marka.Emri">@item.marka.Emri</a>
+                        </p>
+                        <p class="card-text">
+                            <b>Kategoria: </b>@item.Kategori.Emri
+                        </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detajet</a>
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Shto ne Karte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+

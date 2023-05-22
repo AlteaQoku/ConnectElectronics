@@ -1,0 +1,60 @@
+﻿@model ConnectElectronics.Models.Porosi
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detajet e Porosise</h1>
+
+<div>
+    <h4>Porosi</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Emri)
+        </dt>
+        <dd class="col-sm-14">
+            @Html.DisplayFor(model => model.Emri)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Mbiemri)
+        </dt>
+        <dd class="col-sm-14">
+            @Html.DisplayFor(model => model.Mbiemri)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Adresa)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.Adresa)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Qyteti)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.Qyteti)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataPorosis)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.DataPorosis)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.ShumaT)
+        </dt>
+        <dd class = "col-sm-14">
+            @Html.DisplayFor(model => model.ShumaT) ALL
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Shenime)
+        </dt>
+        <dd class="col-sm-14">
+            @Html.DisplayFor(model => model.Shenime)
+        </dd>
+    </dl>
+     <a class="btn btn-info float-left" asp-controller="Porosi_Detaje" asp-action="Details" asp-route-id="@Model.Id">Produktet e Blera</a>
+</div>
+
+
