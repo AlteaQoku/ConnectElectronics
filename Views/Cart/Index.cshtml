@@ -1,40 +1,39 @@
 ﻿@model ConnectElectronics.Models.ViewModels.CartViewModel
 
 @{
-    ViewData["Title"] = "Karta";
+    ViewData["Title"] = "Shopping Cart";
 }
 
 @if (Model.ProdukteShport.Count > 0)
 {
     <table class="table">
         <tr>
-            <th>Produkt</th>
-            <th>Sasia</th>
-            <th>Foto</th>
-            <th>Cmimi</th>
-            <th>Shuma</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Amount</th>
         </tr>
         @foreach (var item in Model.ProdukteShport)
         {
             <tr>
                 <td>@item.ProduktEmri</td>
-                <td>@item.Sasi</td>
-                <td> <img width="50" height="50" src="~/images/@item.Image" /><br></td>
-                <td>
+                <td>@item.Sasi
                     <a class="btn btn-success btn-sm" asp-action="Add" asp-route-id="@item.ProduktId">+</a>
                     <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProduktId">-</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProduktId">Fshi Produktin</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProduktId"><i class="fa-solid fa-trash fa-xs" style="color: white;"></i></a>
                 </td>
-                <td>@item.Cmimi ALL</td>
-                <td>@Model.ProdukteShport.Where(x => x.ProduktId == item.ProduktId).Sum(x => x.Sasi * x.Cmimi) ALL</td>
+                <td> <img width="50" height="50" src="~/images/@item.Image" /><br></td>
+                <td>@item.Cmimi $</td>
+                <td>@Model.ProdukteShport.Where(x => x.ProduktId == item.ProduktId).Sum(x => x.Sasi * x.Cmimi) $</td>
             </tr>
         }
         <tr>
-            <td class="text-right" colspan="4">Shuma totale: @Model.CmimiTotal ALL</td>
+            <td class="text-right" colspan="4">Order Amount: @Model.CmimiTotal $</td>
         </tr>
         <tr>
             <td class="text-right" colspan="4">
-                <a class="btn btn-danger" asp-action="Clear">Pastro Karten</a>
+                <a class="btn btn-danger" asp-action="Clear">Clear Cart</a>
                 <a class="btn btn-primary" asp-controller="Porosi" asp-action="CheckOut">Checkout</a>
             </td>
         </tr>
@@ -42,5 +41,5 @@
 }
 else
 {
-    <h3 class="display-4 text-center">Karta juaj eshte bosh</h3>
+    <h3 class="display-4 text-center">Your Cart is empty</h3>
 }

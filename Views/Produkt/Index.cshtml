@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Produkt>
 @{
-    ViewData["Title"] = "Lista e Produkteve";
+    ViewData["Title"] = "List of Products";
 }
 
 @if (Model.Count() < 1)
 {
-    <h3>Nuk gjendet asnje rezultat</h3>
+    <h3>No Result</h3>
 }else{
 
     <br />
@@ -25,11 +25,11 @@
                             
                             <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; cursor:pointer; ">
                                 <p class="card-text">@item.Pershkrimi</p>
-                                <p class="card-text text-success">@item.Cmimi ALL</p>
-                                <p class="card-text"><b>Kategoria: </b>@item.Kategori.Emri</p>
+                                <p class="card-text text-success">@item.Cmimi $</p>
+                                <p class="card-text"><b>Category: </b>@item.Kategori.Emri</p>
                             </a>
                         <p class="card-text">
-                            <b>Marka: </b>
+                            <b>Brand: </b>
                             <a asp-controller="Marka" asp-action="Details" asp-route-id="@item.marka.Id">@item.marka.Emri</a>
                         </p>
                         <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="fa-solid fa-cart-plus fa-2xl" style="color: #ff0000;"></i></a>

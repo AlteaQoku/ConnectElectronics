@@ -1,13 +1,15 @@
 ﻿@model SmallCartViewModel
+<script src="https://kit.fontawesome.com/90647f9caf.js" crossorigin="anonymous"></script>
 @if (Model != null)
 {
-    <p>Produktet ne shporte: <span class="badge badge-primary">@Model.NumriProdukteve</span></p>
-    <p>Totali: <b>@Model.TotalCmimi ALL</b></p>
-    <a class="btn btn-info" asp-controller="Cart" asp-action="Index">Shiko Shporte</a>
-    <a class="btn btn-danger" asp-controller="Cart" asp-action="Clear">Pastro Shporte</a>
+    <p>Number of products: <span class="badge badge-primary">@Model.NumriProdukteve</span></p>
+    <p>Amount: <b>@Model.TotalCmimi $</b></p>
+    <a class="btn btn-info" asp-controller="Cart" asp-action="Index">Cart Details</a>
+    <a class="btn btn-danger" asp-controller="Cart" asp-action="Clear"><i class="fa-solid fa-trash fa-xs" style="color: white;"></i></a>
+    <a classs="btn btn-success" asp-controller="Porosi" asp-action="CheckOut"><i class="fa-brands fa-cc-visa fa-2xl"></i> Checkout</a>
 }
 else
 {
-    <p class="lead m-0">Karta eshte bosh</p>
+    <p class="lead m-0">Your Cart is empty</p>
 }
 
