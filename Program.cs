@@ -2,14 +2,32 @@ using ConnectElectronics.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ConnectElectronics.Models;
+using Microsoft.AspNetCore.Authentication.Google;
+
 namespace ConnectElectronics
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+
+           
             var builder = WebApplication.CreateBuilder(args);
 
+            var services = builder.Services;
+            var configuration = builder.Configuration;
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
+
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+                microsoftOptions.AuthorizationEndpoint += "?prompt=select_account";
+             });
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -21,6 +39,9 @@ namespace ConnectElectronics
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
             var app = builder.Build();
+
+          
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
