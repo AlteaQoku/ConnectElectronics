@@ -31,7 +31,7 @@ namespace ConnectElectronics.Data.Migrations
                 name: "PhoneNumber",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
+                nullable: true,
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
@@ -41,28 +41,28 @@ namespace ConnectElectronics.Data.Migrations
                 name: "Birthday",
                 table: "AspNetUsers",
                 type: "datetime2",
-                nullable: false,
+                nullable: true,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
                 name: "City",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "FirstName",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "HouseNr",
                 table: "AspNetUsers",
                 type: "int",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
@@ -76,14 +76,14 @@ namespace ConnectElectronics.Data.Migrations
                 name: "PostalNumber",
                 table: "AspNetUsers",
                 type: "int",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
                 name: "Street",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
 
             migrationBuilder.AlterColumn<string>(

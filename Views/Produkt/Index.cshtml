@@ -6,46 +6,40 @@
 @if (Model.Count() < 1)
 {
     <h3>Nuk gjendet asnje rezultat</h3>
-}
-<br />
-<div class="row" style="padding-left:75px">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-3 col-sm-6 col-12 mb-6">
-            <div class="card">
-                <div class="card-header text-white" style="background-color:#FF0000;height:3.5rem">
-                    <h5 class="card-title">@item.Emri</h5>
+}else{
+
+    <br />
+    <div style="display: flex; flex-wrap:wrap; width:100%; justify-content:start; align-items:center; gap:10px; padding: 0 10px 20px 10px;">
+        @foreach (var item in Model)
+        {
+             <div class="card" style="width:25%;">
+                <div style="background-color:#FF0000; border-top-left-radius:15px; border-top-right-radius:15px; text-align:start; display:flex; justify-content:start; align-items:center; padding-block:10px;">
+                    <h5 style="color:white; margin:0; padding-left:10px;">@item.Emri</h5>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 col-12">
+                <div style=" border-bottom-left-radius:25px; border-bottom-right-radius:25px;display:flex; justify-content:center; align-items:center; padding:5px 10px 10px 10px; gap:10px; background-color:#F1F1F1 ">
+                        <div class="">
                             <img class="img-fluid" src="~/images/@item.Foto" width="150px" height="150px" alt="Product Image">
                         </div>
-                        <div class="col-md-6 col-12">
-                            <br/>
-                            <p class="card-text">@item.Pershkrimi</p>
-                            <p class="card-text text-success">@item.Cmimi ALL</p>
-                        
+                        <div class="">
+                            <br />
+                            
+                            <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; cursor:pointer; ">
+                                <p class="card-text">@item.Pershkrimi</p>
+                                <p class="card-text text-success">@item.Cmimi ALL</p>
+                                <p class="card-text"><b>Kategoria: </b>@item.Kategori.Emri</p>
+                            </a>
                         <p class="card-text">
                             <b>Marka: </b>
-                            <a class="text-decoration-none" asp-controller="Marka" asp-action="Details" asp-route-id="@item.marka.Emri">@item.marka.Emri</a>
+                            <a asp-controller="Marka" asp-action="Details" asp-route-id="@item.marka.Id">@item.marka.Emri</a>
                         </p>
-                        <p class="card-text">
-                            <b>Kategoria: </b>@item.Kategori.Emri
-                        </p>
+                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="fa-solid fa-cart-plus fa-2xl" style="color: #ff0000;"></i></a>
                         </div>
-                    </div>
-                </div>
-                <div class="card-footer bg-white">
-                    <div class="d-flex justify-content-between">
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detajet</a>
-                        <a class="btn btn-success" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Shto ne Karte</a>
-                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+            
+        }
+    </div>
+}
 
 
 
