@@ -1,0 +1,38 @@
+﻿@model ConnectElectronics.Models.Kategori
+@{
+    ViewData["Title"] = "Shto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:150px">
+<h1>Shto Kategori</h1>
+
+<h4>Kategori</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Emri" class="control-label"></label>
+                <input asp-for="Emri" class="form-control" />
+                <span asp-validation-for="Emri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pershkrimi" class="control-label"></label>
+                <input asp-for="Pershkrimi" class="form-control" />
+                <span asp-validation-for="Pershkrimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Lista e Kategorive</a>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -41,7 +41,5 @@ namespace ConnectElectronics.Models
        // [DisplayName("Nr_Shtepise")]
         public int HouseNr { get; set; }
 
-
-
     }
 }

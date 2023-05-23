@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConnectElectronics.Data.Migrations
 {
+   
     public partial class Migration1Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

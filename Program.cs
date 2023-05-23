@@ -2,8 +2,7 @@ using ConnectElectronics.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ConnectElectronics.Models;
-using Microsoft.AspNetCore.Authentication.Google;
-
+using ConnectElectronics.Infrastructure;
 namespace ConnectElectronics
 {
     public class Program
@@ -33,15 +32,18 @@ namespace ConnectElectronics
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.IsEssential = true;
+            });
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
             var app = builder.Build();
-
-          
-
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -59,7 +61,7 @@ namespace ConnectElectronics
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
