@@ -1,29 +1,28 @@
 ﻿@page
 @model LoginModel
 
-
+@{
+    ViewData["Title"] = "Log in";
+}
 
 <h1>@ViewData["Title"]</h1>
-<div class="row ">
-    <div class="col-md-4" style="margin-left:0px;display:inline;">
+<div class="row">
+    <div class="col-md-4">
         <section>
-            <form id="account" method="post" >
-                <h2 style="margin-top:50px;">Let's sign you in</h2>
+            <form id="account" method="post">
+                <h2>Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
-                    <label asp-for="Input.Email" class="form-label"></label>
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email" class="form-label"></label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating">
-                    <label asp-for="Input.Password" class="form-label"></label>
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <p style="float:right;font-size:10px;color:#333333">
-                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                </p>
                 <div>
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
@@ -48,7 +47,7 @@
        
         
     </div>
-    <div class="col-md-6 col-md-offset-2" style="margin-top:50px">
+    <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Or login with</h3>
             <hr />
