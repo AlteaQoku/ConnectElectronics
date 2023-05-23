@@ -26,10 +26,9 @@ namespace ConnectElectronics.Controllers
        
         public async Task<IActionResult> Index(string emri = "", string StringKerkimi="",string Sorting="")
         {
-
             var produkte = from m in _context.Produkte.Include(p => p.marka)
                 .Include(p => p.Kategori) select m;
-            if (emri == "" && StringKerkimi=="")
+            if ((emri == "" || emri=="*") && StringKerkimi=="")
             {
                 if (Sorting == "Cmimi")
                 {
@@ -39,16 +38,22 @@ namespace ConnectElectronics.Controllers
 
                 return View(await produkte.ToListAsync());
             }
-            if (!String.IsNullOrEmpty(StringKerkimi))
+            if (!String.IsNullOrEmpty(StringKerkimi) && !String.IsNullOrEmpty(emri))
+            {
+                Kategori kategori = await _context.Kategorit.Where(c => c.Emri == emri).FirstOrDefaultAsync();
+                var produkteKategori = _context.Produkte.Where(p => p.KategoriID == kategori.Id && (p.Emri!.Contains(StringKerkimi) || p.Pershkrimi!.Contains(StringKerkimi))).Include(p => p.marka);
+                return View(await produkteKategori.OrderBy(p=>p.Cmimi).ToListAsync());
+            }
+            else if (!String.IsNullOrEmpty(StringKerkimi))
             {
                 produkte = produkte.Where(s => s.Emri!.Contains(StringKerkimi) || s.Pershkrimi!.Contains(StringKerkimi));
-                return View(await produkte.OrderBy(p=>p.Cmimi).ToListAsync());
+                return View(await produkte.OrderBy(p => p.Cmimi).ToListAsync());
             }
             else
             {
                 Kategori kategori = await _context.Kategorit.Where(c => c.Emri == emri).FirstOrDefaultAsync();
                 if (kategori == null) return RedirectToAction("Index");
-                var produkteKategori = _context.Produkte.Where(p => p.KategoriID == kategori.Id);
+                var produkteKategori = _context.Produkte.Where(p => p.KategoriID == kategori.Id).Include(p => p.marka);
                 return View(await produkteKategori.OrderBy(p=>p.Cmimi).ToListAsync());
             }
         }

@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<Kategori>
 
-<ul class="list-group">
-    <li class="list-group-item">
+<select id="selectKategori"class="input-select">
+    <option class="list-group-item">
         <p>
-        <a class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-kategori="">Te Gjitha Produktet</a>
-        <a class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-Sorting="Cmimi">Nga Cmimi me i madh</a>
+        <a class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-kategori="">Te Gjitha</a>
+        @*<a class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-Sorting="Cmimi">Nga Cmimi me i madh</a>*@
         </p>
-    </li>
+    </option>
 
     @foreach (var item in Model)
     {
-        <li class="list-group-item">
-            <a class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-emri="@item.Emri">@item.Emri</a>
-        </li>
+        <option class="list-group-item">
+            <p class="nav-link text-dark" asp-controller="Produkt" asp-action="Index" asp-route-emri="@item.Emri">@item.Emri</p>
+        </option>
     }
    
-</ul>
+</select>
