@@ -1,4 +1,5 @@
 ﻿using ConnectElectronics.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,8 +13,14 @@ namespace ConnectElectronics.Controllers
         {
             _logger = logger;
         }
+		public async Task<IActionResult> Logout()
+		{
+			await HttpContext.SignOutAsync(); // Sign out the user
+			return RedirectToAction("Index", "Home");
+		}
 
-        public IActionResult Index()
+
+		public IActionResult Index()
         {
             return View();
         }

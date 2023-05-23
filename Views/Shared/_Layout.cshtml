@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using ConnectElectronics.Areas.Identity.Pages.Account.Manage;
+@using ConnectElectronics.Models;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +33,7 @@
     <link type="text/css" rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
+
 	<!-- HEADER -->
 	<header>
 		<!-- TOP HEADER -->
@@ -40,9 +46,25 @@
 				</ul>
 				<ul class="header-links pull-right">
 					<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-					<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+					<li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							<a href="Identity/Account/Manage" >@User.Identity.Name</a>
+						
+						<li class="nav-item">
+							<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+								<button type="submit" style="color:white;text-decoration:none;border:none;background-color:#1E1F29">Logout</button>
+							</form>
+						</li>
+
+						}
+						else
+						{
+							<a href="Identity/Account/Login" >Log in</a>
+						}
+					</li>
 				</ul>
-				<partial name="_LoginPartial" />
+				
 			</div>
 		</div>
 		<!-- /TOP HEADER -->
@@ -230,7 +252,7 @@
 						<div class="footer">
 							<h3 class="footer-title">Service</h3>
 							<ul class="footer-links">
-								<li><a href="#">My Account</a></li>
+								<li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a></li>
 								<li><a href="#">View Cart</a></li>
 								<li><a href="#">Wishlist</a></li>
 								<li><a href="#">Track My Order</a></li>
