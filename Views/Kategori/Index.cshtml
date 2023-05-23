@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div style="padding-left:150px">
-<h1>Liste e Kategorive</h1>
+<h1>Categories</h1>
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="Create">Krijo Kategori te ri</a>
+        <a asp-action="Create">Create new Category</a>
     </p>
 }
 <table class="table">
@@ -37,8 +37,8 @@
             <td>
                     @if (User.IsInRole("Admin")){
                     
-                <a asp-action="Edit" asp-route-id="@item.Id">Edito</a> 
-                <a asp-action="Delete" asp-route-id="@item.Id">Fshi</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }                    
             </td>
         </tr>
