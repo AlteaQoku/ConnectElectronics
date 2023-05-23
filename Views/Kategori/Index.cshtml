@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ConnectElectronics.Models.Kategori>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:150px">
+<h1>Liste e Kategorive</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Krijo Kategori te ri</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Emri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pershkrimi)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Emri)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pershkrimi)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin")){
+                    
+                <a asp-action="Edit" asp-route-id="@item.Id">Edito</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id">Fshi</a>
+                    }                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

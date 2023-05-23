@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ConnectElectronics.Models.Porosi>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-left:150px">
+
+<h1>Historia e Porosive</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mbiemri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Qyteti)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Shenime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.ShumaT)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emri)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mbiemri)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qyteti)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shenime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShumaT) ALL
+                </td>
+                <td>
+                    <a asp-controller="Porosi_Detaje" asp-action="Details" asp-route-id="@item.Id">Detaje</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    </div>

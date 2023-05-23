@@ -1,6 +1,8 @@
 using ConnectElectronics.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ConnectElectronics.Models;
+using ConnectElectronics.Infrastructure;
 
 namespace ConnectElectronics
 {
@@ -15,13 +17,20 @@ namespace ConnectElectronics
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.IsEssential = true;
+            });
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
             var app = builder.Build();
-
+            app.UseSession();
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

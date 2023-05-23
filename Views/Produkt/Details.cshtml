@@ -1,0 +1,45 @@
+﻿@model Produkt
+@{
+    ViewData["Title"] = "Detajet e Produktit";
+}
+<br />
+<div class="container" style="border-color: black;">
+    <div class="row">
+        <div class="col-md-8" style="padding-left:50px">
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FF0000;height:3.5rem;text-align:center">
+                    <h5 class="card-title">@Model.Emri</h5>
+                </div>
+                <div class="card-body display:flex">
+                    <div class="row">
+                        <div class="col-md-6">     
+                                <img class="img-fluid" src="~/images/@Model.Foto" alt="Product Image">
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <p class="card-text">@Model.Pershkrimi</p>
+                            <br />
+                            <p style="color: #96BEFF;">@Model.Cmimi ALL</p>
+                            <p class="card-text">
+                                <b>Marka: </b>
+                                <a class="text-decoration-none" asp-controller="Marka" asp-action="Details" asp-route-id="@Model.marka.Id">@Model.marka.Emri</a>
+                            </p>
+                            <p class="card-text">
+                                <b>Kategoria: </b>@Model.Kategori.Emri
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-danger" asp-action="Index">Kthehu Pas</a>
+                        <a class="btn btn-danger" asp-action="ProduktOferte" asp-route-id="@Model.Id">Vendoseni ne Oferte</a>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edito</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Fshi</a>
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">Shto ne Karte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
