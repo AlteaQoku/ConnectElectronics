@@ -21,7 +21,7 @@
                         <div class="">
                             <br />
 
-                            <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; cursor:pointer; ">
+                            <a asp-controller="Produkt" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; cursor:pointer; ">
                                 <p class="card-text">@item.Pershkrimi</p>
                                 <p class="card-text text-success">@item.Cmimi $</p>
                                 <p class="card-text"><b>Category: </b>@item.Kategori.Emri</p>
