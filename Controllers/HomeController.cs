@@ -3,20 +3,27 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using ConnectElectronics.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace ConnectElectronics.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
+            _context = context;
             _logger = logger;
         }
 		
 		public IActionResult Index()
         {
-            return View();
+            var cookieval = Request.Cookies["SaveLastCategory"];
+            ViewBag.Cookie = cookieval;
+            return View(_context.Produkte.Include(p=>p.Kategori).Include(p=>p.marka).ToList());
         }
 
         public IActionResult Privacy()

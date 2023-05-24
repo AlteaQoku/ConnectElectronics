@@ -6,10 +6,10 @@
 }
 <div style="padding-left:150px">
 
-<h1>Detaje</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>Marka</h4>
+    <h4>Brand</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -27,11 +27,11 @@
     </dl>
 </div>
 <div>
-    <p>
-    @(User.IsInRole("Admin")){
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edito</a> 
-    }
-    <a asp-action="Index">Lista e Markave</a>
+        @(User.IsInRole("Admin")){
+      <p>
+    < a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
+     }
+    <a asp-action="Index">Brands</a>
     </p>
 </div>
 </div>

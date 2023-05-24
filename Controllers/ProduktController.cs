@@ -10,32 +10,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ConnectElectronics.Data;
 using ConnectElectronics.Models;
+using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Http;
+
 
 namespace ConnectElectronics.Controllers
 {
     public class ProduktController : Controller
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
+
+
+    
+    private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ApplicationDbContext _context;
 
         public ProduktController(ApplicationDbContext context,IWebHostEnvironment webHostEnvironment)
         {
+
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
        
-        public async Task<IActionResult> Index(string emri = "", string StringKerkimi="",string Sorting="")
+        public async Task<IActionResult> Index(string emri = "", string StringKerkimi="")
         {
-            var produkte = from m in _context.Produkte.Include(p => p.marka)
-                .Include(p => p.Kategori) select m;
+            var produkte = from m in _context.Produkte.Include(p => p.marka).Include(p => p.Kategori) select m;
+
             if ((emri == "" || emri=="*") && StringKerkimi=="")
             {
-                if (Sorting == "Cmimi")
-                {
-                    produkte = produkte.OrderByDescending(stu => stu.Cmimi);
-                }else
-                        produkte = produkte.OrderBy(stu => stu.Cmimi);
-
+                produkte = produkte.OrderByDescending(stu => stu.Cmimi);
                 return View(await produkte.ToListAsync());
             }
             if (!String.IsNullOrEmpty(StringKerkimi) && !String.IsNullOrEmpty(emri))
@@ -48,6 +50,7 @@ namespace ConnectElectronics.Controllers
             {
                 produkte = produkte.Where(s => s.Emri!.Contains(StringKerkimi) || s.Pershkrimi!.Contains(StringKerkimi));
                 return View(await produkte.OrderBy(p => p.Cmimi).ToListAsync());
+
             }
             else
             {
@@ -89,7 +92,12 @@ namespace ConnectElectronics.Controllers
             {
                 return NotFound();
             }
+            var saveCategory = produkt.Kategori.Emri;
+            var lastCat = Request.Cookies["LastCategory"];
 
+            CookieOptions co = new CookieOptions();
+            co.Expires = DateTime.Now.AddDays(7);
+            HttpContext.Response.Cookies.Append("SaveLastCategory", saveCategory, co);
             return View(produkt);
         }
         public IActionResult Create()

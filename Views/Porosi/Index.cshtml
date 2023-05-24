@@ -6,7 +6,7 @@
 }
 <div style="padding-left:150px">
 
-<h1>Porosi</h1>
+<h1>Order</h1>
 
 <table class="table">
     <thead>
@@ -66,8 +66,8 @@
                     @Html.DisplayFor(modelItem => item.ShumaT) ALL
                 </td>
                 <td>    
-                    <a asp-controller="Porosi_Detaje" asp-action="Details" asp-route-id="@item.Id">Detaje</a> |
-                    <a asp-controller="Porosi" asp-action="Delete" asp-route-id="@item.Id">Fshi</a> 
+                    <a asp-controller="Porosi_Detaje" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Porosi" asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
                 </td>
             </tr>
         }

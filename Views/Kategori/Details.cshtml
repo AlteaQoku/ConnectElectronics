@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div style="padding-left:150px">
-<h1>Detaje</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>Kategori</h4>
+    <h4>Category</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -26,12 +26,12 @@
     </dl>
 </div>
 <div>
-    <p>
-    @(User.IsInRole("Admin")){
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edito</a>
-     <a asp-action="Delete" asp-route-id="@Model.Id">Fshi</a>
+        @(User.IsInRole("Admin")){
+      <p>
+     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+     <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
         }
-    <a asp-action="Index">Lista e Kategorive</a>
+    <a asp-action="Index">Categories</a>
     </p>
 </div>
 </div>

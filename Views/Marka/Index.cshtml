@@ -6,11 +6,11 @@
 }
 <div style="padding-left:150px">
 
-<h1>Lista e Markave</h1>
+<h1>Brands</h1>
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="Create">Krijo Marke te re</a>
+        <a asp-action="Create">Create new brand</a>
     </p>
 }
 <table class="table">
@@ -37,8 +37,8 @@
             <td>
                     @if (User.IsInRole("Admin")){
                     
-                <a asp-action="Edit" asp-route-id="@item.Id">Edito</a> 
-                <a asp-action="Delete" asp-route-id="@item.Id">Fshi</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }                    
             </td>
         </tr>

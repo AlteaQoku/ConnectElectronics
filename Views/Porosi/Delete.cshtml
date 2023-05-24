@@ -1,16 +1,16 @@
 ﻿@model ConnectElectronics.Models.Porosi
 
 @{
-    ViewData["Title"] = "Fshi Porosi";
+    ViewData["Title"] = "Delete Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div style="padding-left:150px">
 
-<h1>Fshi Porosi</h1>
+<h1>Delete Order</h1>
 
-<h3>Deshironi te shini kete porosi?</h3>
+<h3>Do you want to delete this order?</h3>
 <div>
-    <h4>Porosi</h4>
+    <h4>Order</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -72,7 +72,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Lista e Porosive</a>
+        <a asp-action="Index">Orders</a>
     </form>
 </div>
 </div>
