@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ConnectElectronics.Models;
 using ConnectElectronics.Infrastructure;
+
 namespace ConnectElectronics
 {
     public class Program
