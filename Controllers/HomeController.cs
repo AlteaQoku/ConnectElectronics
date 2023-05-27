@@ -6,6 +6,8 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ConnectElectronics.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace ConnectElectronics.Controllers
 {
@@ -18,12 +20,14 @@ namespace ConnectElectronics.Controllers
             _context = context;
             _logger = logger;
         }
-		
-		public IActionResult Index()
+
+        public  IActionResult Index(int? pageNumber)
         {
+            
             var cookieval = Request.Cookies["SaveLastCategory"];
             ViewBag.Cookie = cookieval;
-            return View(_context.Produkte.Include(p=>p.Kategori).Include(p=>p.marka).ToList());
+            int pageSize = 4;
+            return View( PaginatedList<Produkt>.Create(_context.Produkte.Include(p=>p.Kategori).Include(p=>p.marka).ToList(),pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Privacy()
