@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace ConnectElectronics.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -28,6 +28,7 @@ namespace ConnectElectronics.Data
         public DbSet<Produkt> Produkte { get; set; }
 
         public DbSet<Porosi_Detaje> Porosi_Detajet { get; set; }
+
 
     }
 }
