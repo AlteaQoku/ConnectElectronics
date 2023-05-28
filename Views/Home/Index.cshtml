@@ -48,7 +48,7 @@
         </div>
     
 </div>
-@Html.Partial("_ProduktetPartial", Model)
+
 <!-- Display pagination links with page count -->
 <div class="pagination">
     @for (int i = 1; i <= ViewBag.TotalPages; i++)
@@ -56,7 +56,6 @@
         <a href="@Url.Action("Index", new { page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
     }
 </div>
-
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -66,3 +65,5 @@
     <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-deafoult @prevDisabled" style="margin-right:10px;color:#D10024;"> Previous </a>
     <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-deafoult @nextDisabled" style="margin-right:10px;color:#D10024;">Next</a>
 </div>
+@Html.Partial("_ProduktetPartial",Model)
+

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Produkt>
+﻿@using ConnectElectronics.Models
 <div class="row" style="padding-bottom:50px;">
     
        
@@ -7,7 +7,7 @@
     <div class="products-tabs">
         <!-- tab -->
         <div id="tab1" class="tab-pane active">
-            @foreach (var item in Model)
+            @foreach (var item in ViewBag.recommended)
             {
                 
                 if (item.Kategori.Emri == ViewBag.Cookie)
