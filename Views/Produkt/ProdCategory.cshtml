@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<Produkt>
-@{
-    ViewData["Title"] = "List of Products";
-}
 
+@{
+    ViewData["Title"] = "Hot Deals";
+}
 @if (Model.Count() < 1)
 {
-    <h3>No Result</h3>
-}else{
-
+    <h3>NO RESULTS</h3>
+}
+else
+{
+   
     <br />
     <div class="row" style="padding-bottom:50px;">
 
@@ -52,7 +54,4 @@
 
     </div>
 }
-
-
-
 

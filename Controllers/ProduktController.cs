@@ -234,7 +234,20 @@ namespace ConnectElectronics.Controllers
             return RedirectToAction(nameof(Index));
              
             }
-        }
+          public IActionResult ProdCategory(int? id)
+            {
+                if (id == null || id == 0)
+                {
+                    return NotFound();
+                }
+                var produktet= _context.Produkte.Where(p=>p.KategoriID== id).ToList();
+
+            return View(produktet);
+
+            }
+    }
+
+       
     }
            
         
