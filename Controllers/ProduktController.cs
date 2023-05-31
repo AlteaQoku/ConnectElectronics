@@ -35,8 +35,8 @@ namespace ConnectElectronics.Controllers
         {
             var cookieval = Request.Cookies["SaveLastCategory"];
             ViewBag.Cookie = cookieval;
-            int pageSize = 2;
-            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Include(p => p.marka).Include(p => p.Kategori);
+            int pageSize = 8;
+            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Take(4).Include(p => p.marka).Include(p => p.Kategori);
             ViewBag.recommended = produkteRecommended;
             ViewBag.kategoriemri = emri;
             ViewBag.kerkimi = StringKerkimi;

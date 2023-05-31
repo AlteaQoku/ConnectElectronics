@@ -10,10 +10,15 @@ namespace ConnectElectronics.Controllers
 	{
 		private readonly ApplicationDbContext _context;
 		public WebApiController(ApplicationDbContext context) => _context = context;
-		public bool Index()
+		
+		public IActionResult getUsers()
 		{
-			return false;
+			return Ok(_context.Users.Count());
+		}
 
+		public IActionResult prodForDiscount()
+		{
+			return Ok(_context.Produkte.OrderByDescending(p => p.Sasia).Take(3));
 		}
 	}
 }
