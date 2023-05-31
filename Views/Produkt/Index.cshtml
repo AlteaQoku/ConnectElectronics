@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Produkt>
+﻿@model PaginatedList<Produkt>
 @{
     ViewData["Title"] = "List of Products";
 }
@@ -6,11 +6,12 @@
 @if (Model.Count() < 1)
 {
     <h3>No Result</h3>
-}else{
-
-    <br />
+}
+else
+{
+  
+   
     <div class="row" style="padding-bottom:50px;">
-
 
         <div class="products-tabs">
             <!-- tab -->
@@ -51,8 +52,21 @@
         </div>
 
     </div>
+    <div class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+    </div>
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    <div style="text-align:center;color:#D10024;margin-bottom:40px;">
+        <a asp-action="Index" asp-route-emri="@(ViewBag.kategoriemri)" asp-route-StringKerkimi="@(ViewBag.kerkimi)" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-deafoult @prevDisabled" style="margin-right:10px;color:#D10024;"> Previous </a>
+        <a asp-action="Index" asp-route-emri="@(ViewBag.kategoriemri)" asp-route-StringKerkimi="@(ViewBag.kerkimi)" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-deafoult @nextDisabled" style="margin-right:10px;color:#D10024;">Next</a>
+    </div>
+    @Html.Partial("_ProduktetPartial",Model)
+
 }
-
-
 
 

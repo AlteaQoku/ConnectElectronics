@@ -29,5 +29,6 @@ namespace ConnectElectronics.Data
 
         public DbSet<Porosi_Detaje> Porosi_Detajet { get; set; }
 
+
     }
 }

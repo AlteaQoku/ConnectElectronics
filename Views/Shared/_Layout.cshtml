@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Identity;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +80,8 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
-								<img src="~/img/logo.png" alt="">
+							<a asp-controller="Home" asp-action="Index" class="logo">
+								<img src="~/img/logo-no-background.png" width="190px" height="65px" alt="">
 							</a>
 						</div>
 					</div>
@@ -139,10 +141,11 @@
 				<ul class="main-nav nav navbar-nav">
 					<li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
 					<li><a asp-controller="Produkt" asp-action="Oferte">Hot Deals</a></li>
-					<li><a asp-controller="Produkt" asp-action="ProdCategory" >Laptops</a></li>
-					<li><a asp-controller="Produkt" asp-action="ProdCategory" >Smartphones</a></li>
-					<li><a asp-controller="Produkt" asp-action="ProdCategory">Cameras</a></li>
-					<li><<a asp-controller="Produkt" asp-action="ProdCategory">Accessories</a></li>
+					<li><a asp-controller="Kategori" asp-action="Index">Categories</a></li>
+					<li><a asp-controller="Produkt" asp-action="Index" asp-route-emri="Laptops">Laptops</a></li>
+					<li><a asp-controller="Produkt" asp-action="Index" asp-route-emri="Smartphones">Smartphones</a></li>
+					<li><a asp-controller="Produkt" asp-action="Index" asp-route-emri="Cameras">Cameras</a></li>
+					<li><a asp-controller="Produkt" asp-action="Index" asp-route-emri="Accessories">Accessories</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -156,6 +159,7 @@
             @RenderBody()
         </main>
     </div>
+	
 
 	<!-- FOOTER -->
 	<footer id="footer">
@@ -167,6 +171,7 @@
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
 						<div class="footer">
+						
 							<h3 class="footer-title">About Us</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 							<ul class="footer-links">

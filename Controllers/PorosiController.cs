@@ -32,7 +32,7 @@ namespace ConnectElectronics.Controllers
             var PorosiPersonale = _context.Porosit.Where(p => p.KlientId == UserId);
             return View(await PorosiPersonale.OrderByDescending(p => p.Id).ToListAsync());
         }
-       
+        [Authorize]
         public IActionResult CheckOut()
         {
             return View();
