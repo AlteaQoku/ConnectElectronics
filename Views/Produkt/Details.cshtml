@@ -30,7 +30,11 @@
                     <div class="d-flex justify-content-between">
                         
                         <a class="btn btn-danger" asp-action="Index">Get Back</a>
+                        if(!@Model.Oferte){
                         <a class="btn btn-danger" asp-action="ProduktOferte" asp-route-id="@Model.Id">Add in Offers</a>
+                        }else{
+                        <a class="btn btn-danger" asp-action="HiqOferte" asp-route-id="@Model.Id">Remove from Offers</a>
+                        }
                         <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa-sharp fa-solid fa-trash fa-xl"></i></a>
                         <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"><i class="fa-solid fa-cart-plus fa-2xl" style="color: #ff0000;"></i></a>

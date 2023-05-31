@@ -241,8 +241,31 @@ namespace ConnectElectronics.Controllers
             return RedirectToAction(nameof(Index));
              
             }
+        public IActionResult HiqOferte(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Produkt produkt = _context.Produkte.Where(x => x.Id == id && x.Oferte==true).FirstOrDefault();
+
+            if (produkt != null)
+            {
+                int? SasiaTani = produkt.Sasia;
+
+                if (SasiaTani > 20 && produkt.Oferte != true)
+                {
+                    produkt.Cmimi = 0.9 / produkt.Cmimi;
+                    produkt.Oferte = true;
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
         }
     }
+
+}
            
         
 
