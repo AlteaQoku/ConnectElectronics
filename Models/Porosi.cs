@@ -1,11 +1,13 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConnectElectronics.Models
 {
     public class Porosi
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required, Display(Name = "Id e Klientit")]
         public string KlientId { get; set; }

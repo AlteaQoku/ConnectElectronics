@@ -251,14 +251,11 @@ namespace ConnectElectronics.Controllers
 
             if (produkt != null)
             {
-                int? SasiaTani = produkt.Sasia;
-
-                if (SasiaTani > 20 && produkt.Oferte != true)
-                {
-                    produkt.Cmimi = 0.9 / produkt.Cmimi;
-                    produkt.Oferte = true;
+               
+                    produkt.Cmimi = (produkt.Cmimi / 0.9);
+                    produkt.Oferte = false;
                     _context.SaveChanges();
-                }
+                
             }
             return RedirectToAction(nameof(Index));
 

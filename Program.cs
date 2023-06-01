@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ConnectElectronics.Models;
 using ConnectElectronics.Infrastructure;
 
+
 namespace ConnectElectronics
 {
     public class Program
@@ -28,6 +29,7 @@ namespace ConnectElectronics
                 microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
                 microsoftOptions.AuthorizationEndpoint += "?prompt=select_account";
              });
+           
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
