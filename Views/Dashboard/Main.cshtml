@@ -1,20 +1,50 @@
 ﻿<link rel="stylesheet" href="~/css/dashboard.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="mainDDiv">
     <h1>The Dashboard</h1>
-    <p >Check information regarding Page-Traffic/Sales/Trends etc.</p>
+    <p >Information regarding Page-Traffic/Sales/Trends etc.</p>
     <div class="dashboard">
-        <div class="dCard">
-            <h3>All Users:</h3>
+        <div class="dCard" style="display:flex; justify-content:center; align-items:center; gap:20px;">
+            <h3 class="cardTitle">Perdorues:</h3>
             <span id="users"></span>
         </div>
         <div class="dCard" id="showProductsContainer">
-            <h3>Produktet me sasi me te madhe</h3>
-            <div id="showProducts">
+            <h3 class="cardTitle">Produktet me sasi me te madhe</h3>
+            <table id="showProducts" class="table">
+                <tr>
+                    <th>Produkti</th>
+                    <th>Sasia</th>
+                    <th>Oferta</th>
+                </tr>
 
+            </table>
+        </div>
+        <div class="dCard">
+            <h3 class="cardTitle">Produktet me sasi me te madhe</h3>
+            <canvas id="myChart" class="cardBody"></canvas>
+        </div>
+        <div class="dCard">
+            <h3 class="cardTitle">Blerja me e madhe e muajit</h3>
+            <div style="display:flex; flex-direction:column; gap:20px; justify-content:center; align-items:start; padding:1.5rem; width:100%;">
+                <div style=" display:flex; justify-content:start; gap:1.5rem; align-items:center; width:100%;">
+                <span>Emri:</span><span id="klientEmri"></span>
+                </div>
+
+                <div style=" display:flex; justify-content:start; gap:1.5rem; align-items:center; width:100%;">
+                <span>Mbiemri:</span><span id="klientMbiemri"></span>
+                </div>
+
+                <div style=" display:flex; justify-content:start; gap:1.5rem; align-items:center; width:100%;">
+                <span>UserName:</span><span id="klientUser"></span>
+                </div>
+
+                <div style=" display:flex; justify-content:start; gap:1.5rem; align-items:center; width:100%;">
+                <span>Shuma:</span><span id="klientShuma"></span>
+                </div>
             </div>
         </div>
-        <div class="dCard">let</div>
     </div>
 </div>
 
@@ -26,12 +56,50 @@
         })
         $.getJSON("/api/WebApi/prodForDiscount",(data)=>{
             data.forEach((product)=>{
-                console.log(product)
                 let check = product.oferte == true ? "Ne Oferte" : "Jo ne oferte";
                 $("#showProducts").append(
-                    `<div style="display:flex; justify-content:center; align-items:start; gap:20px;"><h5>${product.emri}</h5><h5>${product.sasia}</h5><h5>${check}</h5></div>`
+                    `<tr><td>${product.emri}</td> <td>${product.sasia}</td> <td class="prod">${check}</td></tr>`
                 )
             })
+        })
+
+        $.getJSON("/api/WebApi/getSalesInMonth", (data)=>{
+            let labels =[]
+            let datasets=[]
+            data.forEach((value,key)=>{ 
+                labels.push(value.muaji)
+                datasets.push(value.count)
+            })
+            
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'No. Sales/Month',
+                        data: datasets,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        $.getJSON("/api/WebApi/getUserHighestBuy", (data) => {
+            $("#klientEmri").text(data[0].emri)
+            $("#klientMbiemri").text(data[0].mbiemri)
+            $("#klientUser").text(data[0].klientUserName)
+            $("#klientShuma").text(data[0].shumaT+" Lek")
+        })
+        
+        $.getJSON("/api/WebApi/getProductsInfo", (data) => {
+            console.log(data)
         })
     })
 </script>
