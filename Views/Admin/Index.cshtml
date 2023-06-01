@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ConnectElectronics.Models.ViewModels.UserViewModel>
+<h3>Users Managment</h3>
+
+
+<table class="table table-sm table-bordered">
+    <tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Birthday</th><th>City</th><th>Role</th><th>Manage</th></tr>
+    @if (Model.Count() == 0)
+    {
+        <tr><td colspan="4" class="text-center">There are no users in this site.</td></tr>
+    }
+    else
+    {
+        foreach (var user in Model)
+        {
+            <tr>
+
+                <td>@user.Name</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Birthday.ToString("d")</td>
+                <td>@user.City</td>
+                <td>@user.Role</td>
+
+
+                <td class="text-center">
+
+                    <a class="btn btn-sm btn-primary" asp-controller="Admin"
+               asp-route-id="@user.Id" asp-action="Create">Add Role</a>
+                    <a class="btn btn-sm btn-warning" asp-controller="Admin"
+               asp-route-id="@user.Id" asp-action="ShowEdit">Edit</a>
+                    <form method="post" asp-controller="Admin" asp-action="Delete" asp-route-id="@user.Id">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<a asp-controller="Role" class="btn btn-primary" asp-action="Index">Manage Roles</a>

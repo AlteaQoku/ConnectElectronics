@@ -1,0 +1,7 @@
+﻿@model ConnectElectronics.Models.ViewModels.RoleViewModel
+<h3 style="margin-left:250px;margin-top:30px;">Add a new role</h3>
+<form asp-action="CreateRole" asp-controller="Role">
+    <input asp-for="Name" class="form-control" style="width:70%;margin-left:250px;">
+            <span asp-validation-for="Name" class="text-danger"></span>
+    <button type="submit" class="btn btn-sm btn-danger" style="margin-left:300px;margin-top:20px;margin-bottom:20px;">Save</button>
+</form>
