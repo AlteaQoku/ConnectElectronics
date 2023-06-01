@@ -48,18 +48,5 @@ namespace ConnectElectronics.Controllers
 
 			return Ok(_context.Porosit.Where(p => p.DataPorosis.Month == DateTime.Now.Month).OrderByDescending(p=>p.ShumaT).Take(1));
 		}
-		public async Task<IActionResult> getProductsInfo()
-		{
-			var products = await _context.Produkte.Include(p => p.marka).ToListAsync();
-            var productDtos = products.Select(p => new 
-            {
-                Id = p.Id,
-                Emri = p.Emri,
-                Marka = p.marka.Emri,
-                Cmimi = p.Cmimi,
-				Sasia = p.Sasia
-            });
-			return Ok(productDtos);
-        }
 	}
 }
