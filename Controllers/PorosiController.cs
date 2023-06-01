@@ -7,7 +7,6 @@ using ConnectElectronics.Infrastructure;
 using ConnectElectronics.Models;
 using ConnectElectronics.Models.ViewModels;
 using System.Data;
-using PayPal.Api;
 namespace ConnectElectronics.Controllers
 {
     public class PorosiController : Controller
