@@ -15,13 +15,11 @@
     let _total = @Model.CmimiTotal;
 
     paypal.Button.render({
-        //Configure environment
         env: 'sandbox',
         client: {
             sandbox: 'AYDDkRa49JaKRC6TEGwrtuZsie3QoCkuFAjWMbIogbu3sqD-WSaNF5oqxo9P4jXR84dMbcV5nGm4xjGZ'
         },
 
-        //Customize button
         locale: 'en_US',
         style: {
             size: 'small',
@@ -30,7 +28,6 @@
         },
         commit: true,
 
-        //Set up a payment
         payment: function (data, actions) {
             return actions.payment.create({
                 transactions: [{
@@ -42,7 +39,6 @@
             });
         },
 
-        //Execute the payment
         onAuthorize: function (data, actions) {
             return actions.payment.execute().then(function () {
                 var url = '@Url.Action("Ukrye", "Porosi", new { id=ViewBag.PrID})';
