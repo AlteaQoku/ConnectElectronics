@@ -1,10 +1,12 @@
 ﻿using ConnectElectronics.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ConnectElectronics.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace ConnectElectronics.Controllers
 {
@@ -18,11 +20,15 @@ namespace ConnectElectronics.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public  IActionResult Index(int? pageNumber)
         {
+            
             var cookieval = Request.Cookies["SaveLastCategory"];
             ViewBag.Cookie = cookieval;
-            return View(_context.Produkte.Include(p=>p.Kategori).Include(p=>p.marka).ToList());
+            int pageSize = 8;
+            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Take(4).Include(p => p.marka).Include(p => p.Kategori);
+            ViewBag.recommended = produkteRecommended;
+            return View( PaginatedList<Produkt>.Create(_context.Produkte.Include(p=>p.Kategori).Include(p=>p.marka).ToList(),pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Privacy()

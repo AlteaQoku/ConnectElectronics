@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Produkt>
+﻿@model PaginatedList<Produkt>
 @{
     ViewData["Title"] = "List of Products";
 }
@@ -6,41 +6,67 @@
 @if (Model.Count() < 1)
 {
     <h3>No Result</h3>
-}else{
+}
+else
+{
+  
+   
+    <div class="row" style="padding-bottom:50px;">
 
-    <br />
-    <div style="display: flex; flex-wrap:wrap; width:100%; justify-content:start; align-items:center; gap:10px; padding: 0 10px 20px 10px;">
-        @foreach (var item in Model)
-        {
-             <div class="card" style="width:25%;">
-                <div style="background-color:#D10024; border-top-left-radius:15px; border-top-right-radius:15px; text-align:start; display:flex; justify-content:start; align-items:center; padding-block:10px;">
-                    <h5 style="color:white; margin:0; padding-left:10px;">@item.Emri</h5>
-                </div>
-                <div style=" border-bottom-left-radius:25px; border-bottom-right-radius:25px;display:flex; justify-content:center; align-items:center; padding:5px 10px 10px 10px; gap:10px; background-color:#F1F1F1 ">
-                        <div class="">
-                            <img class="img-fluid" src="~/images/@item.Foto" width="150px" height="150px" alt="Product Image">
+        <div class="products-tabs">
+            <!-- tab -->
+            <div id="tab1" class="tab-pane active">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3" style="padding-bottom:30px;">
+
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="~/images/@item.Foto" alt="" height="213px" width="213px">
+
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Kategori.Emri</p>
+                                <h3 class="product-name"><a href="#">@item.Emri</a></h3>
+                                <h4 class="product-price">$ @item.Cmimi <del class="product-old-price">$ @item.Cmimi </del></h4>
+
+                                <div class="product-btns">
+                                    <button class="quick-view">
+                                        <i class="fa fa-eye"></i><span class="tooltipp">
+                                            <a asp-controller="Produkt" asp-action="Details" asp-route-id="@item.Id" style="color:white;">More Details</a>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn">
+                                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart </a>
+                                </button>
+                            </div>
                         </div>
-                        <div class="">
-                            <br />
-                            
-                            <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; cursor:pointer; ">
-                                <p class="card-text">@item.Pershkrimi</p>
-                                <p class="card-text text-success">@item.Cmimi $</p>
-                                <p class="card-text"><b>Category: </b>@item.Kategori.Emri</p>
-                            </a>
-                        <p class="card-text">
-                            <b>Brand: </b>
-                            <a asp-controller="Marka" asp-action="Details" asp-route-id="@item.marka.Id">@item.marka.Emri</a>
-                        </p>
-                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="fa-solid fa-cart-plus fa-2xl" style="color: #D10024;"></i></a>
-                        </div>
-                </div>
+                    </div>       <!-- /product -->
+                }
+
             </div>
-            
+        </div>
+
+    </div>
+    <div class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }
     </div>
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    <div style="text-align:center;color:#D10024;margin-bottom:40px;">
+        <a asp-action="Index" asp-route-emri="@(ViewBag.kategoriemri)" asp-route-StringKerkimi="@(ViewBag.kerkimi)" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-deafoult @prevDisabled" style="margin-right:10px;color:#D10024;"> Previous </a>
+        <a asp-action="Index" asp-route-emri="@(ViewBag.kategoriemri)" asp-route-StringKerkimi="@(ViewBag.kerkimi)" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-deafoult @nextDisabled" style="margin-right:10px;color:#D10024;">Next</a>
+    </div>
+    @Html.Partial("_ProduktetPartial",Model)
+
 }
-
-
 
 

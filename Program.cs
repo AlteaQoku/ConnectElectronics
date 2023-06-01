@@ -10,8 +10,24 @@ namespace ConnectElectronics
     {
         public static void Main(string[] args)
         {
+
+           
             var builder = WebApplication.CreateBuilder(args);
 
+            var services = builder.Services;
+            var configuration = builder.Configuration;
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
+
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+                microsoftOptions.AuthorizationEndpoint += "?prompt=select_account";
+             });
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -29,8 +45,7 @@ namespace ConnectElectronics
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
             var app = builder.Build();
-            app.UseSession();
-            
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -47,7 +62,7 @@ namespace ConnectElectronics
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

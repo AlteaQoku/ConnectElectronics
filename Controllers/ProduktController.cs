@@ -31,25 +31,32 @@ namespace ConnectElectronics.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
        
-        public async Task<IActionResult> Index(string emri = "", string StringKerkimi="")
+        public async Task<IActionResult> Index(int? pageNumber,string emri = "", string StringKerkimi="")
         {
+            var cookieval = Request.Cookies["SaveLastCategory"];
+            ViewBag.Cookie = cookieval;
+            int pageSize = 8;
+            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Take(4).Include(p => p.marka).Include(p => p.Kategori);
+            ViewBag.recommended = produkteRecommended;
+            ViewBag.kategoriemri = emri;
+            ViewBag.kerkimi = StringKerkimi;
             var produkte = from m in _context.Produkte.Include(p => p.marka).Include(p => p.Kategori) select m;
 
             if ((emri == "" || emri=="*") && StringKerkimi=="")
             {
                 produkte = produkte.OrderByDescending(stu => stu.Cmimi);
-                return View(await produkte.ToListAsync());
+                return View(PaginatedList<Produkt>.Create(await produkte.ToListAsync(), pageNumber ?? 1, pageSize));
             }
             if (!String.IsNullOrEmpty(StringKerkimi) && !String.IsNullOrEmpty(emri))
             {
                 Kategori kategori = await _context.Kategorit.Where(c => c.Emri == emri).FirstOrDefaultAsync();
                 var produkteKategori = _context.Produkte.Where(p => p.KategoriID == kategori.Id && (p.Emri!.Contains(StringKerkimi) || p.Pershkrimi!.Contains(StringKerkimi))).Include(p => p.marka);
-                return View(await produkteKategori.OrderBy(p=>p.Cmimi).ToListAsync());
+                return View(PaginatedList<Produkt>.Create(await produkteKategori.OrderBy(p => p.Cmimi).ToListAsync(), pageNumber ?? 1, pageSize));
             }
             else if (!String.IsNullOrEmpty(StringKerkimi))
             {
                 produkte = produkte.Where(s => s.Emri!.Contains(StringKerkimi) || s.Pershkrimi!.Contains(StringKerkimi));
-                return View(await produkte.OrderBy(p => p.Cmimi).ToListAsync());
+                return View(PaginatedList<Produkt>.Create(await produkte.OrderBy(p => p.Cmimi).ToListAsync(), pageNumber ?? 1, pageSize));
 
             }
             else
@@ -57,7 +64,7 @@ namespace ConnectElectronics.Controllers
                 Kategori kategori = await _context.Kategorit.Where(c => c.Emri == emri).FirstOrDefaultAsync();
                 if (kategori == null) return RedirectToAction("Index");
                 var produkteKategori = _context.Produkte.Where(p => p.KategoriID == kategori.Id).Include(p => p.marka);
-                return View(await produkteKategori.OrderBy(p=>p.Cmimi).ToListAsync());
+                return View(PaginatedList<Produkt>.Create(await produkteKategori.OrderBy(p => p.Cmimi).ToListAsync(), pageNumber ?? 1, pageSize));
             }
         }
         public async Task<IActionResult> MarkaProdukte(string emri="")
@@ -234,7 +241,20 @@ namespace ConnectElectronics.Controllers
             return RedirectToAction(nameof(Index));
              
             }
-        }
+          public IActionResult ProdCategory(int? id)
+            {
+                if (id == null || id == 0)
+                {
+                    return NotFound();
+                }
+                var produktet= _context.Produkte.Where(p=>p.KategoriID== id).ToList();
+
+            return View(produktet);
+
+            }
+    }
+
+       
     }
            
         

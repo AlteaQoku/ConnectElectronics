@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Produkt>
+
+@{
+    ViewData["Title"] = "Hot Deals";
+}
+@if (Model.Count() < 1)
+{
+    <h3>NO RESULTS</h3>
+}
+else
+{
+   
+    <br />
+    <div class="row" style="padding-bottom:50px;">
+
+
+        <div class="products-tabs">
+            <!-- tab -->
+            <div id="tab1" class="tab-pane active">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3" style="padding-bottom:30px;">
+
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="~/images/@item.Foto" alt="" height="213px" width="213px">
+
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Kategori.Emri</p>
+                                <h3 class="product-name"><a href="#">@item.Emri</a></h3>
+                                <h4 class="product-price">$ @item.Cmimi <del class="product-old-price">$ @item.Cmimi </del></h4>
+
+                                <div class="product-btns">
+                                    <button class="quick-view">
+                                        <i class="fa fa-eye"></i><span class="tooltipp">
+                                            <a asp-controller="Produkt" asp-action="Details" asp-route-id="@item.Id" style="color:white;">More Details</a>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn">
+                                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>       <!-- /product -->
+                }
+
+            </div>
+        </div>
+
+    </div>
+}
+
