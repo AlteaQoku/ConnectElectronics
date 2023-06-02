@@ -2,9 +2,9 @@
 
 <form method="post" class="mt-3" asp-action="Edit" asp-controller="Role" asp-route-Id="@Model.Id">
 
-
+     <label asp-for="Name" class="col-sm-2 col-form-label" style="margin-left:100px;margin-top:30px;"></label>
     <div class="form-group row">
-        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+       
         <div class="col-sm-10">
             <input asp-for="Name" class="form-control">
             <span asp-validation-for="Name" class="text-danger"></span>
@@ -13,9 +13,9 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        <div class="col-sm-10" style="margin-left:250px;">
+            <button type="submit" class="btn btn-primary" style="background-color:#D10024">Save</button>
+            <a asp-action="Index" class="btn btn-primary" style="background-color:#D10024">Cancel</a>
         </div>
     </div>
     </form>

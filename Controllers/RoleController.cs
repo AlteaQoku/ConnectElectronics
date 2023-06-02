@@ -2,9 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using ConnectElectronics.Models;
 using ConnectElectronics.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ConnectElectronics.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         public UserManager<ApplicationUser> UserManager;
@@ -30,13 +34,13 @@ namespace ConnectElectronics.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Caktojmë emrin e rolit
+                
                 IdentityRole identityRole = new IdentityRole
                 {
                     Name = model.Name
                 };
 
-                // Ruajmë Rolin duke thërritur metodën CreateAsync e cila shton rolin në tabelën AspNetRoles 
+          
                 IdentityResult result = await RoleManager.CreateAsync(identityRole);
 
                 if (result.Succeeded)
@@ -71,7 +75,7 @@ namespace ConnectElectronics.Controllers
             if (role == null)
             {
 
-                return BadRequest("Roli nuk gjendet");
+                return BadRequest("This role does not exists.");
             }
 
             var model = new EditRole
@@ -91,7 +95,7 @@ namespace ConnectElectronics.Controllers
 
             if (role == null)
             {
-                return BadRequest("Roli nuk gjendet" + model.Id);
+                return BadRequest("This role was not found." + model.Id);
             }
             else
             {

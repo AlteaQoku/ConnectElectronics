@@ -1,13 +1,25 @@
 ﻿@model PaginatedList<Produkt>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "List of Products";
 }
 
-
-    <br />
-
-
-<h3>All products</h3>
+<br />
+@if(User.IsInRole("Employee")){
+    <div style="justify-content:center; align-items:center; display:flex; width:100%;">
+        <a asp-action="Create"  class="btn btn-primary" asp-controller="Kategori">Shto Kategori Produktesh</a>
+        <a asp-action="Create"  class="btn btn-primary" asp-controller="Marka">Shto Marke Produkti</a>
+        <a asp-action="Create"  class="btn btn-primary" asp-controller="Produkt">Shto Produkt</a>
+    </div>
+}else if (User.IsInRole("Admin"))
+{
+    <a asp-action="Main" class="btn btn-primary" asp-controller="Dashboard">DashBoard</a>
+    <a asp-action="Index" class="btn btn-primary" asp-controller="Admin">Menaxho Perdoruesit</a>
+    <a asp-action="Create" class="btn btn-primary" asp-controller="Role">Shto nje Rol te ri</a>
+}else{
+    <h3>All products</h3>
 <div class="row" style="padding-bottom:50px;">
     
     
@@ -57,13 +69,19 @@
     }
 </div>
 
-@{
+
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
+
 <div style="text-align:center;color:#D10024;margin-bottom:40px;">
     <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-deafoult @prevDisabled" style="margin-right:10px;color:#D10024;"> Previous </a>
     <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-deafoult @nextDisabled" style="margin-right:10px;color:#D10024;">Next</a>
 </div>
 @Html.Partial("_ProduktetPartial",Model)
+
+}
+
+    
+
+
 
