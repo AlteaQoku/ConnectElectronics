@@ -61,38 +61,38 @@ namespace ConnectElectronics.Areas.Identity.Pages.Account.Manage
            // [Display(Name = "Phone number")]
             //public string PhoneNumber { get; set; }
            [Required]
-            [DisplayName("Emri")]
+            [DisplayName("Name")]
             [StringLength(30,MinimumLength =3)]
             public string? FirstName { get; set; }
 
             [Required]
-            [DisplayName("Mbiemri")]
+            [DisplayName("LastName")]
             [StringLength(30,MinimumLength =3)]
             public string? LastName { get; set; }
 
             [Required]
-            [DisplayName("Ditelindja")]
+            [DisplayName("Birthday")]
             [DataType(DataType.Date)]
             public DateTime Birthday { get; set; }
 
             [Required]
-            [DisplayName("Numri i Kontaktit")]
+            [DisplayName("Phone Number")]
             public string? PhoneNumber { get; set; }
 
             [Required]
-             [DisplayName("Qyteti")]
+             [DisplayName("City")]
             public string? City { get; set; }
 
             [Required]
-            [DisplayName("Rruga")]
+            [DisplayName("Street")]
             public string? Street { get; set; }
 
             [Required]
-            [DisplayName("Kodi Postar")]
+            [DisplayName("Postal Code")]
             public int PostalNumber { get; set; }
 
 
-            [DisplayName("Nr_Shtepise")]
+            [DisplayName("House Number")]
             public int HouseNr { get; set; }
         }
 

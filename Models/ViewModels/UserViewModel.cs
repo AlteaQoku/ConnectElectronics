@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace ConnectElectronics.Models.ViewModels
+﻿namespace ConnectElectronics.Models
 {
     public class UserViewModel
     {
