@@ -36,7 +36,7 @@ namespace ConnectElectronics.Controllers
             var cookieval = Request.Cookies["SaveLastCategory"];
             ViewBag.Cookie = cookieval;
             int pageSize = 8;
-            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Take(4).Include(p => p.marka).Include(p => p.Kategori);
+            var produkteRecommended = _context.Produkte.Where(p => p.Kategori.Emri == cookieval).Include(p => p.marka).Include(p => p.Kategori);
             ViewBag.recommended = produkteRecommended;
             ViewBag.kategoriemri = emri;
             ViewBag.kerkimi = StringKerkimi;
@@ -107,6 +107,7 @@ namespace ConnectElectronics.Controllers
             HttpContext.Response.Cookies.Append("SaveLastCategory", saveCategory, co);
             return View(produkt);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["MarkaID"] = new SelectList(_context.Markat, "Id", "Emri");
@@ -137,6 +138,7 @@ namespace ConnectElectronics.Controllers
             }
             return View(produkt);
         }
+        [Authorize(Roles = "Admin")]
 
         public IActionResult Edit(int? id)
         {
@@ -181,6 +183,8 @@ namespace ConnectElectronics.Controllers
             }
             return View(produkt);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Produkte == null){
@@ -219,6 +223,7 @@ namespace ConnectElectronics.Controllers
         {
             return _context.Produkte.Any(e => e.Id == id);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult ProduktOferte(int? id)
         {
             if (id == null || id == 0)
@@ -241,21 +246,30 @@ namespace ConnectElectronics.Controllers
             return RedirectToAction(nameof(Index));
              
             }
-          public IActionResult ProdCategory(int? id)
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult HiqOferte(int? id)
+        {
+            if (id == null || id == 0)
             {
-                if (id == null || id == 0)
-                {
-                    return NotFound();
-                }
-                var produktet= _context.Produkte.Where(p=>p.KategoriID== id).ToList();
-
-            return View(produktet);
-
+                return NotFound();
             }
+            Produkt produkt = _context.Produkte.Where(x => x.Id == id && x.Oferte==true).FirstOrDefault();
+
+            if (produkt != null)
+            {
+               
+                    produkt.Cmimi = (produkt.Cmimi / 0.9);
+                    produkt.Oferte = false;
+                    _context.SaveChanges();
+                
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 
-       
-    }
+}
            
         
 

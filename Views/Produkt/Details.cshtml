@@ -23,27 +23,24 @@
                         <b>Brand: </b>
                         <a asp-controller="Marka" asp-action="Details" asp-route-id="@Model.marka.Id">@Model.marka.Emri</a>
                     </p>
-            <div class="add-to-cart">
-                <button class="add-to-cart-btn" style="background-color:#D10024;border-radius:40px;height:35px;width:150px;">
-                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" style="color:black;"><i class="fa fa-shopping-cart"></i>Add to cart </a>
-                </button>
-            </div>
                 </div>
-                
-           
-        
+                <div class="d-flex">
+                    <div class="d-flex justify-content-between">
+                        
+                        <a class="btn btn-danger" asp-action="Index">Get Back</a>
+                        @if (Model.Oferte ?? false)
+                        {
+                       
+                            <a class="btn btn-danger" asp-action="HiqOferte" asp-route-id="@Model.Id">Remove from Offers</a>
+                        }else{
+                            <a class="btn btn-danger" asp-action="ProduktOferte" asp-route-id="@Model.Id">Add in Offers</a>
+                        }
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa-sharp fa-solid fa-trash fa-xl"></i></a>
+                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"><i class="fa-solid fa-cart-plus fa-2xl" style="color: #ff0000;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-        
 </div>
-
-
-<div style="display:inline-block">
-
-
-    <a class="btn btn-danger" asp-action="ProduktOferte" asp-route-id="@Model.Id">Add in Offers</a>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
-    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa-sharp fa-solid fa-trash fa-xl"></i></a>
-</div>
-<br />
-<a style="color:#D10024;margin-left:60px;margin-top:30px;margin-bottom:30px;font-size:40px;" asp-action="Index"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
