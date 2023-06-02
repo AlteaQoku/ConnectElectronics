@@ -68,7 +68,8 @@ namespace ConnectElectronics.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                UserName = user.UserName,
+                Name = user.FirstName,
+                LastName= user.LastName,
                 Birthday = user.Birthday,
                 City = user.City,
 
@@ -89,7 +90,8 @@ namespace ConnectElectronics.Controllers
             else
             {
                 user.Email = model.Email;
-                user.UserName = model.UserName;
+                user.FirstName = model.Name;
+                user.LastName = model.LastName;
                 user.Birthday = model.Birthday;
                 user.City = model.City;
 
