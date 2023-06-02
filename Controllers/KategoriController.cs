@@ -19,6 +19,7 @@ namespace ConnectElectronics.Controllers
         {
             return View(await _context.Kategorit.ToListAsync());
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Kategorit == null)
@@ -34,6 +35,7 @@ namespace ConnectElectronics.Controllers
 
             return View(kategori);
         }
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +53,8 @@ namespace ConnectElectronics.Controllers
             }
             return View(kategori);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Kategorit == null)
@@ -83,6 +87,8 @@ namespace ConnectElectronics.Controllers
             }
             return View(kategori);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Kategorit== null)

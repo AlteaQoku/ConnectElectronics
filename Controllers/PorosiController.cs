@@ -7,6 +7,8 @@ using ConnectElectronics.Infrastructure;
 using ConnectElectronics.Models;
 using ConnectElectronics.Models.ViewModels;
 using System.Data;
+using System.Reflection.Emit;
+
 namespace ConnectElectronics.Controllers
 {
     public class PorosiController : Controller
@@ -24,7 +26,7 @@ namespace ConnectElectronics.Controllers
 
             return View(await _context.Porosit.ToListAsync());
         }
-       
+        [Authorize]
         public async Task<IActionResult> PorositEMia()
         {
             var UserId = _userService.getUserId();
@@ -34,6 +36,7 @@ namespace ConnectElectronics.Controllers
         [Authorize]
         public IActionResult CheckOut()
         {
+            
             return View();
         }
         [HttpPost]
@@ -67,7 +70,6 @@ namespace ConnectElectronics.Controllers
                         ProduktId = item.ProduktId,
                         ShumaProdukt = (double)item.Total,
                         Pr_Sasia=item.Sasi
-                        
                     };
                     shuma +=(double) item.Total;
                     _context.Porosi_Detajet.Add(porosidetaje);
@@ -79,13 +81,21 @@ namespace ConnectElectronics.Controllers
                 porosi.ShumaT = shuma;
                 _context.Porosit.Update(porosi);
                 await _context.SaveChangesAsync();
-                HttpContext.Session.Remove("Cart");
-                return View("Ukrye",(porosi));
+                ViewBag.PrID = porosi.Id;
+                return View("MenyratPagese",(cartVM));
             }
             return RedirectToAction("Index", "Produkt");
         }
-
-     public async Task<ActionResult> Detaje(int? id) { 
+        [Authorize]
+        public IActionResult Ukrye(int? id)
+        {
+            var porosi = _context.Porosit
+       .FirstOrDefault(m => m.Id == id);
+            HttpContext.Session.Remove("Cart");
+            return View(porosi);
+        }
+        [Authorize]
+        public async Task<ActionResult> Detaje(int? id) { 
          
             if (id == null || _context.Porosit == null)
             {
@@ -101,6 +111,8 @@ namespace ConnectElectronics.Controllers
 
             return View(porosi);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Porosit == null)

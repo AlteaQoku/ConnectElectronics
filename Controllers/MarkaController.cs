@@ -24,6 +24,8 @@ namespace ConnectElectronics.Controllers
         {
               return View(await _context.Markat.ToListAsync());
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Markat == null)
@@ -39,6 +41,8 @@ namespace ConnectElectronics.Controllers
 
             return View(marka);
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -55,6 +59,8 @@ namespace ConnectElectronics.Controllers
             }
             return View(marka);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Markat == null)
@@ -87,6 +93,8 @@ namespace ConnectElectronics.Controllers
             }
             return View(marka);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Markat == null)
