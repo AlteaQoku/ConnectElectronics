@@ -26,7 +26,7 @@ namespace ConnectElectronics.Controllers
 
             return View(await _context.Porosit.ToListAsync());
         }
-       
+        [Authorize]
         public async Task<IActionResult> PorositEMia()
         {
             var UserId = _userService.getUserId();
@@ -86,13 +86,15 @@ namespace ConnectElectronics.Controllers
             }
             return RedirectToAction("Index", "Produkt");
         }
+        [Authorize]
         public IActionResult Ukrye(int? id)
         {
             var porosi = _context.Porosit
        .FirstOrDefault(m => m.Id == id);
+            HttpContext.Session.Remove("Cart");
             return View(porosi);
         }
-        
+        [Authorize]
         public async Task<ActionResult> Detaje(int? id) { 
          
             if (id == null || _context.Porosit == null)
@@ -109,6 +111,8 @@ namespace ConnectElectronics.Controllers
 
             return View(porosi);
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Porosit == null)

@@ -3,6 +3,7 @@ using ConnectElectronics.Data;
 using ConnectElectronics.Infrastructure;
 using ConnectElectronics.Models;
 using ConnectElectronics.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ConnectElectronics.Controllers
 {
@@ -14,7 +15,7 @@ namespace ConnectElectronics.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
