@@ -125,7 +125,7 @@ namespace ConnectElectronics.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Kategorit");
+                    b.ToTable("Kategorit", (string)null);
                 });
 
             modelBuilder.Entity("ConnectElectronics.Models.Marka", b =>
@@ -145,7 +145,7 @@ namespace ConnectElectronics.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Markat");
+                    b.ToTable("Markat", (string)null);
                 });
 
             modelBuilder.Entity("ConnectElectronics.Models.Porosi", b =>
@@ -196,7 +196,7 @@ namespace ConnectElectronics.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Porosit");
+                    b.ToTable("Porosit", (string)null);
                 });
 
             modelBuilder.Entity("ConnectElectronics.Models.Porosi_Detaje", b =>
@@ -217,7 +217,7 @@ namespace ConnectElectronics.Data.Migrations
 
                     b.HasIndex("ProduktId");
 
-                    b.ToTable("Porosi_Detajet");
+                    b.ToTable("Porosi_Detajet", (string)null);
                 });
 
             modelBuilder.Entity("ConnectElectronics.Models.Produkt", b =>
@@ -259,7 +259,7 @@ namespace ConnectElectronics.Data.Migrations
 
                     b.HasIndex("MarkaID");
 
-                    b.ToTable("Produkte");
+                    b.ToTable("Produkte", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

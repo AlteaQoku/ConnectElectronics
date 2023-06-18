@@ -6,14 +6,14 @@ namespace ConnectElectronics.Models
 {
     public class Porosi_Detaje
     {
-        [Display(Name = "Id e Produktit")]
+        [Display(Name = "Product ID")]
         public int ProduktId { get; set; }
         public Produkt? Produkt { get; set; }
         public int PorosiId { get; set; }
         public Porosi? Porosi { get; set; }
-        [Display(Name = "Sasia e Produktit")]
+        [Display(Name = "Quantity")]
         public int? Pr_Sasia { get; set; }
-        [Display(Name = "Shuma e Produktit")]
+        [Display(Name = "Price")]
         public double ShumaProdukt { get; set; }
 
     }

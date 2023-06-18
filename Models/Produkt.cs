@@ -10,25 +10,29 @@ namespace ConnectElectronics.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Te lutem jepni nje vlere")]
-        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Name is missing")]
+        [Display(Name = "Name")]
         public string? Emri { get; set; }
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Te lutem jepni nje vlere")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price is missing")]
         [Column(TypeName = "decimal(8, 2)")]
         [ReadOnly(true)]
+        [Display(Name = "Price")]
         public double Cmimi { get; set; }
-        [Range(1, Int32.MaxValue, ErrorMessage = "Sasia duhet te jete me e madhe se 0")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Quantity is missing")]
+        [Display(Name = "Quantity")]
         public int? Sasia { get; set; }
+        [Display(Name = "Offer")]
         public bool? Oferte { get; set; }
+        [Display(Name = "Description")]
         public string? Pershkrimi { get; set; }
         [Display(Name = "FotoURL")]
         public Kategori? Kategori { get; set; }
         [ForeignKey("KategoriID")]
-        [Display(Name = "Kategoria")]
+        [Display(Name = "Category")]
         public int KategoriID { get; set; }
         public List<Porosi_Detaje>? Porosi_Detajet { get; set; }
-        [Display(Name = "Marka")]
+        [Display(Name = "Brand")]
         public int MarkaID { get; set; }
         [ForeignKey("MarkaID")]
         public Marka? marka { get; set; }

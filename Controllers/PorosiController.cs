@@ -82,6 +82,7 @@ namespace ConnectElectronics.Controllers
                 _context.Porosit.Update(porosi);
                 await _context.SaveChangesAsync();
                 ViewBag.PrID = porosi.Id;
+                ViewBag.Shuma = shuma;
                 return View("MenyratPagese",(cartVM));
             }
             return RedirectToAction("Index", "Produkt");

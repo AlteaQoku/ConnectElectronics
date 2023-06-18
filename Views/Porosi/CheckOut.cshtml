@@ -5,46 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div style="padding-left:150px">
-<h1>Checkout</h1>
-
-    <h4>Order</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form  asp-action="CheckOut">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h3>Billing Address</h3>
                 <div class="form-group">
-                    <label asp-for="Emri" class="control-label"></label>
-                    <input asp-for="Emri" class="form-control" />
+                    <label asp-for="Emri" class="control-label"><i class="fa fa-user"></i> Name</label>
+                    <input asp-for="Emri" class="form-control" placeholder="John" />
                     <span asp-validation-for="Emri" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Mbiemri" class="control-label"></label>
-                    <input asp-for="Mbiemri" class="form-control" />
+                    <label asp-for="Mbiemri" class="control-label"><i class="fa fa-user"></i> Surname</label>
+                    <input asp-for="Mbiemri" class="form-control" placeholder="Doe" />
                     <span asp-validation-for="Mbiemri" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Adresa" class="control-label"></label>
-                    <input asp-for="Adresa" class="form-control" />
+                    <label asp-for="Adresa" class="control-label"><i class="fa fa-address-card-o"></i> Address</label>
+                    <input asp-for="Adresa" class="form-control" placeholder="542 W. 15th Street" />
                     <span asp-validation-for="Adresa" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Qyteti" class="control-label"></label>
-                    <input asp-for="Qyteti" class="form-control" />
+                    <label asp-for="Qyteti" class="control-label"><i class="fa fa-institution"></i> City</label>
+                    <input asp-for="Qyteti" class="form-control" placeholder="New York" />
                     <span asp-validation-for="Qyteti" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="NumerKontakti" class="control-label"></label>
-                    <input asp-for="NumerKontakti" class="form-control" />
+                    <label asp-for="NumerKontakti" class="control-label"><i class="fa-solid fa-phone"></i> Phone Number</label>
+                    <input asp-for="NumerKontakti" class="form-control" placeholder="+355 68 123 4567" />
                     <span asp-validation-for="NumerKontakti" class="text-danger"></span>
                 </div>
              <div class="form-group">
-                    <label asp-for="Shenime" class="control-label"></label>
+                    <label asp-for="Shenime" class="control-label"><i class="fa-duotone fa-note"></i></i> Notes</label>
+                    <br />
                     <textarea asp-for="Shenime" class="form-control"></textarea>
                     <span asp-validation-for="Shenime" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Krijo" class="btn btn-primary"/>
+                    <input type="submit" value="Continue to checkout" class="btn btn-primary"/>
                 </div>
                 
             </form>
